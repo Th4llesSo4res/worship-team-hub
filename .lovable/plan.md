@@ -28,7 +28,14 @@ Conexão Supabase verificada: o projeto externo está ligado (URL, chave public�
 - Contexto de sessão + membership, guarda de rotas por autenticação/cargo/status, toasts, skeletons, estados vazios e diálogos de confirmação.
 - PWA básica: manifest, ícones provisórios, meta tags. SPA fallback já garantido pelo roteador (sem 404 em refresh).
 
-## Etapa 4 — Telas
+## Etapa 4 — Cadastro, confirmação de e-mail e convites
+
+- Confirmação de e-mail permanece habilitada.
+- O token do convite sobrevive à confirmação: o cadastro usa `emailRedirectTo` apontando para `/cadastro?convite=TOKEN` (mesma origem), sem gravar o token em logs ou telemetria.
+- Após a confirmação, com usuário autenticado e e-mail confirmado, o aceite compara o e-mail autenticado com o do convite e cria a membership `pending`.
+- Fluxo para quem já tem conta: ao abrir o link, se houver sessão, o aceite ocorre direto; se não houver, o usuário faz login e volta ao mesmo link, preservando o token.
+
+## Etapa 5 — Telas
 
 Públicas: `/login`, `/cadastro?convite=TOKEN`, `/recuperar-senha`.
 Fluxo inicial: `/criar-equipe`, `/aguardando-aprovacao`.
@@ -36,11 +43,23 @@ Protegidas: `/dashboard` (raiz), `/agenda`, `/repertorio`, `/eventos/novo`, `/ev
 
 Dashboard: saudação, próxima escala com função, status e ações confirmar/recusar (recusa exige justificativa), resumo do repertório e próximas escalas. Para líder/ministro: resumo do próximo evento, contagem de confirmados/pendentes/recusados, nomes dos pendentes, alerta de funções não preenchidas e atalhos.
 
-## Etapa 5 — Entrega
+## Etapa 6 — Testes negativos de segurança
+
+Cada cenário deve falhar (erro de permissão) e será verificado:
+
+- músico tentando editar evento e repertório;
+- ministro tentando alterar cargos ou aprovar integrantes;
+- usuário alterando a escala de outra pessoa;
+- usuário de uma organização acessando dados de outra;
+- alteração direta das colunas imutáveis de `event_assignments`;
+- convite expirado, convite já utilizado e convite aceito com e-mail diferente.
+
+## Etapa 7 — Entrega
 
 - Build + lint, revisão das políticas RLS com o linter do Supabase.
-- `.env.example` e README (setup local, variáveis, publicação, como testar os três cargos).
+- `.env.example` e README: setup local, variáveis, publicação, como testar os três cargos e configuração de **Site URL e Redirect URLs** no Supabase Auth para `http://localhost:8080`, o preview do Lovable e a futura URL de produção/Vercel.
 - Relatório final: migrations, tabelas, funções, políticas, rotas e pendências reais.
+
 
 ## Detalhes técnicos
 
