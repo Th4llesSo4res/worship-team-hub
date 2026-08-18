@@ -63,7 +63,7 @@ Cada cenário deve falhar (erro de permissão) e será verificado:
 
 ## Detalhes técnicos
 
-- Escritas sensíveis (criar organização, convites, aceite) via RPC `SECURITY DEFINER` chamada por server functions do TanStack Start; leituras via cliente Supabase com RLS do usuário. Sem `service_role` no frontend.
+- Escritas sensíveis (criar organização, convites, aceite) executadas fora do navegador em server functions; RPCs `SECURITY DEFINER` apenas quando justificado, com `search_path` vazio, qualificação de schema e EXECUTE restrito. Leituras via cliente Supabase com RLS do usuário. Sem `service_role` no frontend.
 - Tipos do banco regenerados após as migrations e usados em todo o código.
 - Nenhum dado de demonstração permanente — apenas as funções musicais iniciais na criação da organização.
 
