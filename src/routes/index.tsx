@@ -1,24 +1,71 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { CalendarDays, ListMusic, Users } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Button } from "@/components/ui/button";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "WorshipApp | Escalas e repertório da equipe de louvor" },
+      {
+        name: "description",
+        content:
+          "Organize escalas, confirmações e repertório da equipe de louvor da sua igreja em um app mobile-first.",
+      },
+      { property: "og:title", content: "WorshipApp | Escalas da equipe de louvor" },
+      {
+        property: "og:description",
+        content: "Organize escalas, confirmações e repertório da equipe de louvor.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: LandingPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function LandingPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-primary text-primary-foreground">
+      <main className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-5 py-14">
+        <section className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">WorshipApp</p>
+          <h1 className="font-display text-4xl font-semibold leading-tight">
+            A escala do louvor organizada em um só lugar
+          </h1>
+          <p className="text-primary-foreground/75">
+            Monte eventos, escale a equipe, receba confirmações e compartilhe o repertório com
+            tonalidade e links de referência.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link to="/cadastro">Criar minha equipe</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+            >
+              <Link to="/login">Já tenho conta</Link>
+            </Button>
+          </div>
+        </section>
+
+        <section className="grid gap-4 sm:grid-cols-3">
+          {[
+            { icon: CalendarDays, title: "Agenda", text: "Cultos, ensaios e eventos especiais." },
+            { icon: Users, title: "Escalas", text: "Convide, escale e acompanhe respostas." },
+            { icon: ListMusic, title: "Repertório", text: "Músicas, tons e links por evento." },
+          ].map((f) => (
+            <div key={f.title} className="rounded-xl border border-primary-foreground/15 p-4">
+              <f.icon className="mb-2 size-6 text-accent" />
+              <h2 className="font-display text-lg font-semibold">{f.title}</h2>
+              <p className="text-sm text-primary-foreground/70">{f.text}</p>
+            </div>
+          ))}
+        </section>
+      </main>
     </div>
   );
 }
