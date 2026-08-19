@@ -489,7 +489,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      accept_invitation: { Args: { _token: string }; Returns: string }
+      create_invitation: {
+        Args: {
+          _email: string
+          _organization_id: string
+          _role: Database["public"]["Enums"]["membership_role"]
+        }
+        Returns: string
+      }
+      create_organization_with_leader: {
+        Args: { _name: string; _slug: string }
+        Returns: string
+      }
     }
     Enums: {
       assignment_status: "pending" | "confirmed" | "declined"
