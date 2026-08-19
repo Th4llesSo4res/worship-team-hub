@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-type CadastroSearch = { convite?: string };
+type CadastroSearch = { convite?: string | undefined };
 
 export const Route = createFileRoute("/cadastro")({
   validateSearch: (search: Record<string, unknown>): CadastroSearch => ({
