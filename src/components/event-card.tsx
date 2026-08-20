@@ -18,7 +18,7 @@ export function EventCard({
   myResponse,
 }: {
   event: EventCardData;
-  myResponse?: string | null;
+  myResponse?: string | null | undefined;
 }) {
   return (
     <Link
