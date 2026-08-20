@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
 import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
+import { Route as AuthenticatedConvitesRouteImport } from './routes/_authenticated/convites'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
@@ -58,6 +59,11 @@ const AuthenticatedAguardandoAprovacaoRoute =
     path: '/aguardando-aprovacao',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedConvitesRoute = AuthenticatedConvitesRouteImport.update({
+  id: '/convites',
+  path: '/convites',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCriarEquipeRoute =
   AuthenticatedCriarEquipeRouteImport.update({
     id: '/criar-equipe',
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/agenda': typeof AuthenticatedAgendaRoute
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/equipe': typeof AuthenticatedEquipeRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/agenda': typeof AuthenticatedAgendaRoute
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/equipe': typeof AuthenticatedEquipeRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
   '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/_authenticated/convites': typeof AuthenticatedConvitesRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/agenda'
     | '/aguardando-aprovacao'
+    | '/convites'
     | '/criar-equipe'
     | '/dashboard'
     | '/equipe'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/agenda'
     | '/aguardando-aprovacao'
+    | '/convites'
     | '/criar-equipe'
     | '/dashboard'
     | '/equipe'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/_authenticated/agenda'
     | '/_authenticated/aguardando-aprovacao'
+    | '/_authenticated/convites'
     | '/_authenticated/criar-equipe'
     | '/_authenticated/dashboard'
     | '/_authenticated/equipe'
@@ -239,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAguardandoAprovacaoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/convites': {
+      id: '/_authenticated/convites'
+      path: '/convites'
+      fullPath: '/convites'
+      preLoaderRoute: typeof AuthenticatedConvitesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/criar-equipe': {
       id: '/_authenticated/criar-equipe'
       path: '/criar-equipe'
@@ -287,6 +306,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
   AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
+  AuthenticatedConvitesRoute: typeof AuthenticatedConvitesRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
@@ -298,6 +318,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
   AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
+  AuthenticatedConvitesRoute: AuthenticatedConvitesRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
