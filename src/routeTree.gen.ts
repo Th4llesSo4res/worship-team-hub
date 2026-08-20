@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
 import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -42,6 +43,11 @@ const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   path: '/recuperar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgendaRoute = AuthenticatedAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAguardandoAprovacaoRoute =
   AuthenticatedAguardandoAprovacaoRouteImport.update({
     id: '/aguardando-aprovacao',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
   '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/login'
     | '/recuperar-senha'
+    | '/agenda'
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/login'
     | '/recuperar-senha'
+    | '/agenda'
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/login'
     | '/recuperar-senha'
+    | '/_authenticated/agenda'
     | '/_authenticated/aguardando-aprovacao'
     | '/_authenticated/criar-equipe'
     | '/_authenticated/dashboard'
@@ -165,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecuperarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agenda': {
+      id: '/_authenticated/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AuthenticatedAgendaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/aguardando-aprovacao': {
       id: '/_authenticated/aguardando-aprovacao'
       path: '/aguardando-aprovacao'
@@ -190,12 +209,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
   AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
   AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
