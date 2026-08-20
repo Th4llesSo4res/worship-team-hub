@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 
 const IndexRoute = IndexRouteImport.update({
@@ -40,6 +41,12 @@ const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   path: '/recuperar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAguardandoAprovacaoRoute =
+  AuthenticatedAguardandoAprovacaoRouteImport.update({
+    id: '/aguardando-aprovacao',
+    path: '/aguardando-aprovacao',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCriarEquipeRoute =
   AuthenticatedCriarEquipeRouteImport.update({
     id: '/criar-equipe',
@@ -52,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
 }
 export interface FileRoutesByTo {
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
 }
 export interface FileRoutesById {
@@ -68,13 +77,26 @@ export interface FileRoutesById {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cadastro' | '/login' | '/recuperar-senha' | '/criar-equipe'
+  fullPaths:
+    | '/'
+    | '/cadastro'
+    | '/login'
+    | '/recuperar-senha'
+    | '/aguardando-aprovacao'
+    | '/criar-equipe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cadastro' | '/login' | '/recuperar-senha' | '/criar-equipe'
+  to:
+    | '/'
+    | '/cadastro'
+    | '/login'
+    | '/recuperar-senha'
+    | '/aguardando-aprovacao'
+    | '/criar-equipe'
   id:
     | '__root__'
     | '/'
@@ -82,6 +104,7 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/login'
     | '/recuperar-senha'
+    | '/_authenticated/aguardando-aprovacao'
     | '/_authenticated/criar-equipe'
   fileRoutesById: FileRoutesById
 }
@@ -130,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecuperarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/aguardando-aprovacao': {
+      id: '/_authenticated/aguardando-aprovacao'
+      path: '/aguardando-aprovacao'
+      fullPath: '/aguardando-aprovacao'
+      preLoaderRoute: typeof AuthenticatedAguardandoAprovacaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/criar-equipe': {
       id: '/_authenticated/criar-equipe'
       path: '/criar-equipe'
@@ -141,10 +171,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
 }
 
