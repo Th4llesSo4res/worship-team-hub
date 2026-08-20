@@ -18,6 +18,7 @@ import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,6 +66,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
+    | '/perfil'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
+    | '/perfil'
   id:
     | '__root__'
     | '/'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/_authenticated/aguardando-aprovacao'
     | '/_authenticated/criar-equipe'
     | '/_authenticated/dashboard'
+    | '/_authenticated/perfil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -205,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/perfil': {
+      id: '/_authenticated/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedPerfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -213,6 +232,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -220,6 +240,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
