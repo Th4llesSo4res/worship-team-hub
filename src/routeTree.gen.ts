@@ -14,7 +14,17 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
+import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
+import { Route as AuthenticatedConvitesRouteImport } from './routes/_authenticated/convites'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
+import { Route as AuthenticatedMusicasRouteImport } from './routes/_authenticated/musicas'
+import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
+import { Route as AuthenticatedRepertorioRouteImport } from './routes/_authenticated/repertorio'
+import { Route as AuthenticatedEventosIdRouteImport } from './routes/_authenticated/eventos.$id'
+import { Route as AuthenticatedEventosNovoRouteImport } from './routes/_authenticated/eventos.novo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,10 +50,62 @@ const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   path: '/recuperar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgendaRoute = AuthenticatedAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAguardandoAprovacaoRoute =
+  AuthenticatedAguardandoAprovacaoRouteImport.update({
+    id: '/aguardando-aprovacao',
+    path: '/aguardando-aprovacao',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedConvitesRoute = AuthenticatedConvitesRouteImport.update({
+  id: '/convites',
+  path: '/convites',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCriarEquipeRoute =
   AuthenticatedCriarEquipeRouteImport.update({
     id: '/criar-equipe',
     path: '/criar-equipe',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMusicasRoute = AuthenticatedMusicasRouteImport.update({
+  id: '/musicas',
+  path: '/musicas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRepertorioRoute = AuthenticatedRepertorioRouteImport.update({
+  id: '/repertorio',
+  path: '/repertorio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEventosIdRoute = AuthenticatedEventosIdRouteImport.update({
+  id: '/eventos/$id',
+  path: '/eventos/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEventosNovoRoute =
+  AuthenticatedEventosNovoRouteImport.update({
+    id: '/eventos/novo',
+    path: '/eventos/novo',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -52,14 +114,34 @@ export interface FileRoutesByFullPath {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
+  '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
+  '/musicas': typeof AuthenticatedMusicasRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/repertorio': typeof AuthenticatedRepertorioRoute
+  '/eventos/$id': typeof AuthenticatedEventosIdRoute
+  '/eventos/novo': typeof AuthenticatedEventosNovoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
+  '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
+  '/musicas': typeof AuthenticatedMusicasRoute
+  '/perfil': typeof AuthenticatedPerfilRoute
+  '/repertorio': typeof AuthenticatedRepertorioRoute
+  '/eventos/$id': typeof AuthenticatedEventosIdRoute
+  '/eventos/novo': typeof AuthenticatedEventosNovoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,13 +150,53 @@ export interface FileRoutesById {
   '/cadastro': typeof CadastroRoute
   '/login': typeof LoginRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
+  '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
+  '/_authenticated/convites': typeof AuthenticatedConvitesRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
+  '/_authenticated/musicas': typeof AuthenticatedMusicasRoute
+  '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
+  '/_authenticated/repertorio': typeof AuthenticatedRepertorioRoute
+  '/_authenticated/eventos/$id': typeof AuthenticatedEventosIdRoute
+  '/_authenticated/eventos/novo': typeof AuthenticatedEventosNovoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cadastro' | '/login' | '/recuperar-senha' | '/criar-equipe'
+  fullPaths:
+    | '/'
+    | '/cadastro'
+    | '/login'
+    | '/recuperar-senha'
+    | '/agenda'
+    | '/aguardando-aprovacao'
+    | '/convites'
+    | '/criar-equipe'
+    | '/dashboard'
+    | '/equipe'
+    | '/musicas'
+    | '/perfil'
+    | '/repertorio'
+    | '/eventos/$id'
+    | '/eventos/novo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cadastro' | '/login' | '/recuperar-senha' | '/criar-equipe'
+  to:
+    | '/'
+    | '/cadastro'
+    | '/login'
+    | '/recuperar-senha'
+    | '/agenda'
+    | '/aguardando-aprovacao'
+    | '/convites'
+    | '/criar-equipe'
+    | '/dashboard'
+    | '/equipe'
+    | '/musicas'
+    | '/perfil'
+    | '/repertorio'
+    | '/eventos/$id'
+    | '/eventos/novo'
   id:
     | '__root__'
     | '/'
@@ -82,7 +204,17 @@ export interface FileRouteTypes {
     | '/cadastro'
     | '/login'
     | '/recuperar-senha'
+    | '/_authenticated/agenda'
+    | '/_authenticated/aguardando-aprovacao'
+    | '/_authenticated/convites'
     | '/_authenticated/criar-equipe'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/equipe'
+    | '/_authenticated/musicas'
+    | '/_authenticated/perfil'
+    | '/_authenticated/repertorio'
+    | '/_authenticated/eventos/$id'
+    | '/_authenticated/eventos/novo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,6 +262,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecuperarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agenda': {
+      id: '/_authenticated/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AuthenticatedAgendaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/aguardando-aprovacao': {
+      id: '/_authenticated/aguardando-aprovacao'
+      path: '/aguardando-aprovacao'
+      fullPath: '/aguardando-aprovacao'
+      preLoaderRoute: typeof AuthenticatedAguardandoAprovacaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/convites': {
+      id: '/_authenticated/convites'
+      path: '/convites'
+      fullPath: '/convites'
+      preLoaderRoute: typeof AuthenticatedConvitesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/criar-equipe': {
       id: '/_authenticated/criar-equipe'
       path: '/criar-equipe'
@@ -137,15 +290,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCriarEquipeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/equipe': {
+      id: '/_authenticated/equipe'
+      path: '/equipe'
+      fullPath: '/equipe'
+      preLoaderRoute: typeof AuthenticatedEquipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/musicas': {
+      id: '/_authenticated/musicas'
+      path: '/musicas'
+      fullPath: '/musicas'
+      preLoaderRoute: typeof AuthenticatedMusicasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/perfil': {
+      id: '/_authenticated/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedPerfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/repertorio': {
+      id: '/_authenticated/repertorio'
+      path: '/repertorio'
+      fullPath: '/repertorio'
+      preLoaderRoute: typeof AuthenticatedRepertorioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/eventos/$id': {
+      id: '/_authenticated/eventos/$id'
+      path: '/eventos/$id'
+      fullPath: '/eventos/$id'
+      preLoaderRoute: typeof AuthenticatedEventosIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/eventos/novo': {
+      id: '/_authenticated/eventos/novo'
+      path: '/eventos/novo'
+      fullPath: '/eventos/novo'
+      preLoaderRoute: typeof AuthenticatedEventosNovoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
+  AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
+  AuthenticatedConvitesRoute: typeof AuthenticatedConvitesRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
+  AuthenticatedMusicasRoute: typeof AuthenticatedMusicasRoute
+  AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
+  AuthenticatedRepertorioRoute: typeof AuthenticatedRepertorioRoute
+  AuthenticatedEventosIdRoute: typeof AuthenticatedEventosIdRoute
+  AuthenticatedEventosNovoRoute: typeof AuthenticatedEventosNovoRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
+  AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
+  AuthenticatedConvitesRoute: AuthenticatedConvitesRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
+  AuthenticatedMusicasRoute: AuthenticatedMusicasRoute,
+  AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
+  AuthenticatedRepertorioRoute: AuthenticatedRepertorioRoute,
+  AuthenticatedEventosIdRoute: AuthenticatedEventosIdRoute,
+  AuthenticatedEventosNovoRoute: AuthenticatedEventosNovoRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
