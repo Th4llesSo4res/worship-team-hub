@@ -28,21 +28,32 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
   const { data, isPending } = useQuery({
     queryKey: ["memberships", membership.organization_id],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data: members, error } = await supabase
         .from("memberships")
-        .select("id, role, status, user_id, profiles:user_id(full_name, phone)")
+        .select("id, role, status, user_id")
         .eq("organization_id", membership.organization_id)
         .order("created_at", { ascending: true });
       if (error) throw error;
-      return data ?? [];
+
+      const ids = (members ?? []).map((m) => m.user_id);
+      const names = new Map<string, string>();
+      if (ids.length > 0) {
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("id, full_name")
+          .in("id", ids);
+        for (const p of profiles ?? []) names.set(p.id, p.full_name);
+      }
+
+      return (members ?? []).map((m) => ({ ...m, full_name: names.get(m.user_id) ?? "Integrante" }));
     },
   });
 
   const updateMember = useMutation({
-    mutationFn: async (input: { id: string; role?: MembershipRole; status?: string }) => {
-      const patch: Record<string, unknown> = {};
-      if (input.role) patch['role'] = input.role;
-      if (input.status) patch['status'] = input.status;
+    mutationFn: async (input: { id: string; role?: MembershipRole; status?: MemberStatus }) => {
+      const patch: { role?: MembershipRole; status?: MemberStatus } = {};
+      if (input.role) patch.role = input.role;
+      if (input.status) patch.status = input.status;
       const { error } = await supabase.from("memberships").update(patch).eq("id", input.id);
       if (error) throw error;
     },

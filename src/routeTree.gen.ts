@@ -18,6 +18,7 @@ import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_authenticated/aguardando-aprovacao'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedMusicasRouteImport } from './routes/_authenticated/musicas'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedRepertorioRouteImport } from './routes/_authenticated/repertorio'
@@ -68,6 +69,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMusicasRoute = AuthenticatedMusicasRouteImport.update({
   id: '/musicas',
   path: '/musicas',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
   '/musicas': typeof AuthenticatedMusicasRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
   '/musicas': typeof AuthenticatedMusicasRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/_authenticated/aguardando-aprovacao': typeof AuthenticatedAguardandoAprovacaoRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/musicas': typeof AuthenticatedMusicasRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/repertorio': typeof AuthenticatedRepertorioRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
+    | '/equipe'
     | '/musicas'
     | '/perfil'
     | '/repertorio'
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/aguardando-aprovacao'
     | '/criar-equipe'
     | '/dashboard'
+    | '/equipe'
     | '/musicas'
     | '/perfil'
     | '/repertorio'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/_authenticated/aguardando-aprovacao'
     | '/_authenticated/criar-equipe'
     | '/_authenticated/dashboard'
+    | '/_authenticated/equipe'
     | '/_authenticated/musicas'
     | '/_authenticated/perfil'
     | '/_authenticated/repertorio'
@@ -241,6 +253,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/equipe': {
+      id: '/_authenticated/equipe'
+      path: '/equipe'
+      fullPath: '/equipe'
+      preLoaderRoute: typeof AuthenticatedEquipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/musicas': {
       id: '/_authenticated/musicas'
       path: '/musicas'
@@ -270,6 +289,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAguardandoAprovacaoRoute: typeof AuthenticatedAguardandoAprovacaoRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedMusicasRoute: typeof AuthenticatedMusicasRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedRepertorioRoute: typeof AuthenticatedRepertorioRoute
@@ -280,6 +300,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAguardandoAprovacaoRoute: AuthenticatedAguardandoAprovacaoRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedMusicasRoute: AuthenticatedMusicasRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedRepertorioRoute: AuthenticatedRepertorioRoute,
