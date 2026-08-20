@@ -5,7 +5,11 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { AppPage } from "@/components/app-page";
 import { friendlyError, roleLabels, statusLabels } from "@/lib/format";
-import type { CurrentMembership, MembershipRole } from "@/hooks/use-session";
+import type {
+  CurrentMembership,
+  MembershipRole,
+  MembershipStatus,
+} from "@/hooks/use-session";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -50,8 +54,8 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
   });
 
   const updateMember = useMutation({
-    mutationFn: async (input: { id: string; role?: MembershipRole; status?: MemberStatus }) => {
-      const patch: { role?: MembershipRole; status?: MemberStatus } = {};
+    mutationFn: async (input: { id: string; role?: MembershipRole; status?: MembershipStatus }) => {
+      const patch: { role?: MembershipRole; status?: MembershipStatus } = {};
       if (input.role) patch.role = input.role;
       if (input.status) patch.status = input.status;
       const { error } = await supabase.from("memberships").update(patch).eq("id", input.id);
@@ -85,7 +89,7 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
               <h2 className="font-display text-lg font-semibold">Aguardando aprovação</h2>
               {pending.map((m) => (
                 <div key={m.id} className="rounded-xl border border-border bg-card p-4">
-                  <p className="font-medium">{m.profiles?.full_name ?? "Integrante"}</p>
+                  <p className="font-medium">{m.full_name}</p>
                   <div className="mt-3 flex gap-2">
                     <Button
                       size="sm"
@@ -119,7 +123,7 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
                   className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4"
                 >
                   <div className="min-w-0">
-                    <p className="truncate font-medium">{m.profiles?.full_name ?? "Integrante"}</p>
+                    <p className="truncate font-medium">{m.full_name}</p>
                     <div className="mt-1 flex gap-1.5">
                       <Badge variant="secondary">{roleLabels[m.role]}</Badge>
                       {m.status !== "active" && (
