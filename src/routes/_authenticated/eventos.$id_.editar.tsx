@@ -8,7 +8,7 @@ import { EventForm, type EventFormValues } from "@/components/event-form";
 import { friendlyError, fromLocalInputValue, toLocalInputValue } from "@/lib/format";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const Route = createFileRoute("/_authenticated/eventos/$id/editar")({
+export const Route = createFileRoute("/_authenticated/eventos/$id_/editar")({
   component: EditarRoute,
 });
 
