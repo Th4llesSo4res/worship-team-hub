@@ -25,7 +25,7 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedRepertorioRouteImport } from './routes/_authenticated/repertorio'
 import { Route as AuthenticatedEventosIdRouteImport } from './routes/_authenticated/eventos.$id'
 import { Route as AuthenticatedEventosNovoRouteImport } from './routes/_authenticated/eventos.novo'
-import { Route as AuthenticatedEventosIdEditarRouteImport } from './routes/_authenticated/eventos.$id.editar'
+import { Route as AuthenticatedEventosIdEditarRouteImport } from './routes/_authenticated/eventos.$id_.editar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -111,9 +111,9 @@ const AuthenticatedEventosNovoRoute =
   } as any)
 const AuthenticatedEventosIdEditarRoute =
   AuthenticatedEventosIdEditarRouteImport.update({
-    id: '/editar',
-    path: '/editar',
-    getParentRoute: () => AuthenticatedEventosIdRoute,
+    id: '/eventos/$id_/editar',
+    path: '/eventos/$id/editar',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -130,7 +130,7 @@ export interface FileRoutesByFullPath {
   '/musicas': typeof AuthenticatedMusicasRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
-  '/eventos/$id': typeof AuthenticatedEventosIdRouteWithChildren
+  '/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/eventos/novo': typeof AuthenticatedEventosNovoRoute
   '/eventos/$id/editar': typeof AuthenticatedEventosIdEditarRoute
 }
@@ -148,7 +148,7 @@ export interface FileRoutesByTo {
   '/musicas': typeof AuthenticatedMusicasRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
-  '/eventos/$id': typeof AuthenticatedEventosIdRouteWithChildren
+  '/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/eventos/novo': typeof AuthenticatedEventosNovoRoute
   '/eventos/$id/editar': typeof AuthenticatedEventosIdEditarRoute
 }
@@ -168,9 +168,9 @@ export interface FileRoutesById {
   '/_authenticated/musicas': typeof AuthenticatedMusicasRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/repertorio': typeof AuthenticatedRepertorioRoute
-  '/_authenticated/eventos/$id': typeof AuthenticatedEventosIdRouteWithChildren
+  '/_authenticated/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/_authenticated/eventos/novo': typeof AuthenticatedEventosNovoRoute
-  '/_authenticated/eventos/$id/editar': typeof AuthenticatedEventosIdEditarRoute
+  '/_authenticated/eventos/$id_/editar': typeof AuthenticatedEventosIdEditarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -227,7 +227,7 @@ export interface FileRouteTypes {
     | '/_authenticated/repertorio'
     | '/_authenticated/eventos/$id'
     | '/_authenticated/eventos/novo'
-    | '/_authenticated/eventos/$id/editar'
+    | '/_authenticated/eventos/$id_/editar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -352,29 +352,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEventosNovoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/eventos/$id/editar': {
-      id: '/_authenticated/eventos/$id/editar'
-      path: '/editar'
+    '/_authenticated/eventos/$id_/editar': {
+      id: '/_authenticated/eventos/$id_/editar'
+      path: '/eventos/$id/editar'
       fullPath: '/eventos/$id/editar'
       preLoaderRoute: typeof AuthenticatedEventosIdEditarRouteImport
-      parentRoute: typeof AuthenticatedEventosIdRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
-
-interface AuthenticatedEventosIdRouteChildren {
-  AuthenticatedEventosIdEditarRoute: typeof AuthenticatedEventosIdEditarRoute
-}
-
-const AuthenticatedEventosIdRouteChildren: AuthenticatedEventosIdRouteChildren =
-  {
-    AuthenticatedEventosIdEditarRoute: AuthenticatedEventosIdEditarRoute,
-  }
-
-const AuthenticatedEventosIdRouteWithChildren =
-  AuthenticatedEventosIdRoute._addFileChildren(
-    AuthenticatedEventosIdRouteChildren,
-  )
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
@@ -386,8 +372,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMusicasRoute: typeof AuthenticatedMusicasRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedRepertorioRoute: typeof AuthenticatedRepertorioRoute
-  AuthenticatedEventosIdRoute: typeof AuthenticatedEventosIdRouteWithChildren
+  AuthenticatedEventosIdRoute: typeof AuthenticatedEventosIdRoute
   AuthenticatedEventosNovoRoute: typeof AuthenticatedEventosNovoRoute
+  AuthenticatedEventosIdEditarRoute: typeof AuthenticatedEventosIdEditarRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -400,8 +387,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMusicasRoute: AuthenticatedMusicasRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedRepertorioRoute: AuthenticatedRepertorioRoute,
-  AuthenticatedEventosIdRoute: AuthenticatedEventosIdRouteWithChildren,
+  AuthenticatedEventosIdRoute: AuthenticatedEventosIdRoute,
   AuthenticatedEventosNovoRoute: AuthenticatedEventosNovoRoute,
+  AuthenticatedEventosIdEditarRoute: AuthenticatedEventosIdEditarRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
