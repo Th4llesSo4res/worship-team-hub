@@ -25,6 +25,7 @@ import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedRepertorioRouteImport } from './routes/_authenticated/repertorio'
 import { Route as AuthenticatedEventosIdRouteImport } from './routes/_authenticated/eventos.$id'
 import { Route as AuthenticatedEventosNovoRouteImport } from './routes/_authenticated/eventos.novo'
+import { Route as AuthenticatedEventosIdEditarRouteImport } from './routes/_authenticated/eventos.$id_.editar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -108,6 +109,12 @@ const AuthenticatedEventosNovoRoute =
     path: '/eventos/novo',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedEventosIdEditarRoute =
+  AuthenticatedEventosIdEditarRouteImport.update({
+    id: '/eventos/$id_/editar',
+    path: '/eventos/$id/editar',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/repertorio': typeof AuthenticatedRepertorioRoute
   '/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/eventos/novo': typeof AuthenticatedEventosNovoRoute
+  '/eventos/$id/editar': typeof AuthenticatedEventosIdEditarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -142,6 +150,7 @@ export interface FileRoutesByTo {
   '/repertorio': typeof AuthenticatedRepertorioRoute
   '/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/eventos/novo': typeof AuthenticatedEventosNovoRoute
+  '/eventos/$id/editar': typeof AuthenticatedEventosIdEditarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +170,7 @@ export interface FileRoutesById {
   '/_authenticated/repertorio': typeof AuthenticatedRepertorioRoute
   '/_authenticated/eventos/$id': typeof AuthenticatedEventosIdRoute
   '/_authenticated/eventos/novo': typeof AuthenticatedEventosNovoRoute
+  '/_authenticated/eventos/$id_/editar': typeof AuthenticatedEventosIdEditarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/repertorio'
     | '/eventos/$id'
     | '/eventos/novo'
+    | '/eventos/$id/editar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/repertorio'
     | '/eventos/$id'
     | '/eventos/novo'
+    | '/eventos/$id/editar'
   id:
     | '__root__'
     | '/'
@@ -215,6 +227,7 @@ export interface FileRouteTypes {
     | '/_authenticated/repertorio'
     | '/_authenticated/eventos/$id'
     | '/_authenticated/eventos/novo'
+    | '/_authenticated/eventos/$id_/editar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -339,6 +352,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEventosNovoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/eventos/$id_/editar': {
+      id: '/_authenticated/eventos/$id_/editar'
+      path: '/eventos/$id/editar'
+      fullPath: '/eventos/$id/editar'
+      preLoaderRoute: typeof AuthenticatedEventosIdEditarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -354,6 +374,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRepertorioRoute: typeof AuthenticatedRepertorioRoute
   AuthenticatedEventosIdRoute: typeof AuthenticatedEventosIdRoute
   AuthenticatedEventosNovoRoute: typeof AuthenticatedEventosNovoRoute
+  AuthenticatedEventosIdEditarRoute: typeof AuthenticatedEventosIdEditarRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -368,6 +389,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRepertorioRoute: AuthenticatedRepertorioRoute,
   AuthenticatedEventosIdRoute: AuthenticatedEventosIdRoute,
   AuthenticatedEventosNovoRoute: AuthenticatedEventosNovoRoute,
+  AuthenticatedEventosIdEditarRoute: AuthenticatedEventosIdEditarRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
