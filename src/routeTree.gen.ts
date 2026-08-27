@@ -19,8 +19,10 @@ import { Route as AuthenticatedAguardandoAprovacaoRouteImport } from './routes/_
 import { Route as AuthenticatedConvitesRouteImport } from './routes/_authenticated/convites'
 import { Route as AuthenticatedCriarEquipeRouteImport } from './routes/_authenticated/criar-equipe'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEntrarEquipeRouteImport } from './routes/_authenticated/entrar-equipe'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedMusicasRouteImport } from './routes/_authenticated/musicas'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedPerfilRouteImport } from './routes/_authenticated/perfil'
 import { Route as AuthenticatedRepertorioRouteImport } from './routes/_authenticated/repertorio'
 import { Route as AuthenticatedEventosIdRouteImport } from './routes/_authenticated/eventos.$id'
@@ -78,6 +80,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEntrarEquipeRoute =
+  AuthenticatedEntrarEquipeRouteImport.update({
+    id: '/entrar-equipe',
+    path: '/entrar-equipe',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
   id: '/equipe',
   path: '/equipe',
@@ -86,6 +94,11 @@ const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
 const AuthenticatedMusicasRoute = AuthenticatedMusicasRouteImport.update({
   id: '/musicas',
   path: '/musicas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPerfilRoute = AuthenticatedPerfilRouteImport.update({
@@ -126,8 +139,10 @@ export interface FileRoutesByFullPath {
   '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/entrar-equipe': typeof AuthenticatedEntrarEquipeRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/musicas': typeof AuthenticatedMusicasRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
   '/eventos/$id': typeof AuthenticatedEventosIdRoute
@@ -144,8 +159,10 @@ export interface FileRoutesByTo {
   '/convites': typeof AuthenticatedConvitesRoute
   '/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/entrar-equipe': typeof AuthenticatedEntrarEquipeRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/musicas': typeof AuthenticatedMusicasRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
   '/perfil': typeof AuthenticatedPerfilRoute
   '/repertorio': typeof AuthenticatedRepertorioRoute
   '/eventos/$id': typeof AuthenticatedEventosIdRoute
@@ -164,8 +181,10 @@ export interface FileRoutesById {
   '/_authenticated/convites': typeof AuthenticatedConvitesRoute
   '/_authenticated/criar-equipe': typeof AuthenticatedCriarEquipeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/entrar-equipe': typeof AuthenticatedEntrarEquipeRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/musicas': typeof AuthenticatedMusicasRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/perfil': typeof AuthenticatedPerfilRoute
   '/_authenticated/repertorio': typeof AuthenticatedRepertorioRoute
   '/_authenticated/eventos/$id': typeof AuthenticatedEventosIdRoute
@@ -184,8 +203,10 @@ export interface FileRouteTypes {
     | '/convites'
     | '/criar-equipe'
     | '/dashboard'
+    | '/entrar-equipe'
     | '/equipe'
     | '/musicas'
+    | '/onboarding'
     | '/perfil'
     | '/repertorio'
     | '/eventos/$id'
@@ -202,8 +223,10 @@ export interface FileRouteTypes {
     | '/convites'
     | '/criar-equipe'
     | '/dashboard'
+    | '/entrar-equipe'
     | '/equipe'
     | '/musicas'
+    | '/onboarding'
     | '/perfil'
     | '/repertorio'
     | '/eventos/$id'
@@ -221,8 +244,10 @@ export interface FileRouteTypes {
     | '/_authenticated/convites'
     | '/_authenticated/criar-equipe'
     | '/_authenticated/dashboard'
+    | '/_authenticated/entrar-equipe'
     | '/_authenticated/equipe'
     | '/_authenticated/musicas'
+    | '/_authenticated/onboarding'
     | '/_authenticated/perfil'
     | '/_authenticated/repertorio'
     | '/_authenticated/eventos/$id'
@@ -310,6 +335,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/entrar-equipe': {
+      id: '/_authenticated/entrar-equipe'
+      path: '/entrar-equipe'
+      fullPath: '/entrar-equipe'
+      preLoaderRoute: typeof AuthenticatedEntrarEquipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/equipe': {
       id: '/_authenticated/equipe'
       path: '/equipe'
@@ -322,6 +354,13 @@ declare module '@tanstack/react-router' {
       path: '/musicas'
       fullPath: '/musicas'
       preLoaderRoute: typeof AuthenticatedMusicasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/perfil': {
@@ -368,8 +407,10 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedConvitesRoute: typeof AuthenticatedConvitesRoute
   AuthenticatedCriarEquipeRoute: typeof AuthenticatedCriarEquipeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEntrarEquipeRoute: typeof AuthenticatedEntrarEquipeRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedMusicasRoute: typeof AuthenticatedMusicasRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPerfilRoute: typeof AuthenticatedPerfilRoute
   AuthenticatedRepertorioRoute: typeof AuthenticatedRepertorioRoute
   AuthenticatedEventosIdRoute: typeof AuthenticatedEventosIdRoute
@@ -383,8 +424,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedConvitesRoute: AuthenticatedConvitesRoute,
   AuthenticatedCriarEquipeRoute: AuthenticatedCriarEquipeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEntrarEquipeRoute: AuthenticatedEntrarEquipeRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedMusicasRoute: AuthenticatedMusicasRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPerfilRoute: AuthenticatedPerfilRoute,
   AuthenticatedRepertorioRoute: AuthenticatedRepertorioRoute,
   AuthenticatedEventosIdRoute: AuthenticatedEventosIdRoute,
