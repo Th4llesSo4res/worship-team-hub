@@ -5,11 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { AppPage } from "@/components/app-page";
 import { friendlyError, roleLabels, statusLabels } from "@/lib/format";
-import type {
-  CurrentMembership,
-  MembershipRole,
-  MembershipStatus,
-} from "@/hooks/use-session";
+import type { CurrentMembership, MembershipRole, MembershipStatus } from "@/hooks/use-session";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -49,7 +45,10 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
         for (const p of profiles ?? []) names.set(p.id, p.full_name);
       }
 
-      return (members ?? []).map((m) => ({ ...m, full_name: names.get(m.user_id) ?? "Integrante" }));
+      return (members ?? []).map((m) => ({
+        ...m,
+        full_name: names.get(m.user_id) ?? "Integrante",
+      }));
     },
   });
 
