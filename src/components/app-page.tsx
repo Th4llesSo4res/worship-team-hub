@@ -45,7 +45,7 @@ export function AppPage({
       return;
     }
     if (!membership) {
-      navigate({ to: "/criar-equipe", replace: true });
+      navigate({ to: "/onboarding", replace: true });
       return;
     }
     if (status === "pending" || status === "inactive") {

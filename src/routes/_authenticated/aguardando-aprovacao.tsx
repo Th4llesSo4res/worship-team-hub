@@ -21,7 +21,7 @@ function AguardandoPage() {
   useEffect(() => {
     if (loading || isPending) return;
     if (!membership) {
-      navigate({ to: "/criar-equipe", replace: true });
+      navigate({ to: "/onboarding", replace: true });
       return;
     }
     if (membership.status === "active") navigate({ to: "/dashboard", replace: true });
