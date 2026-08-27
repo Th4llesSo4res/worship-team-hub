@@ -133,39 +133,72 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
             {others.length === 0 ? (
               <p className="text-sm text-muted-foreground">Nenhum integrante ativo ainda.</p>
             ) : (
-              others.map((m) => (
-                <div
-                  key={m.id}
-                  className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-medium">{m.full_name}</p>
-                    <div className="mt-1 flex gap-1.5">
-                      <Badge variant="secondary">{roleLabels[m.role]}</Badge>
-                      {m.status !== "active" && (
-                        <Badge variant="outline">{statusLabels[m.status]}</Badge>
+              others.map((m) => {
+                const locked = m.id === lastLeaderId;
+                return (
+                  <div key={m.id} className="rounded-xl border border-border bg-card p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="truncate font-medium">{m.full_name}</p>
+                        <div className="mt-1 flex gap-1.5">
+                          <Badge variant="secondary">{roleLabels[m.role]}</Badge>
+                          {m.status !== "active" && (
+                            <Badge variant="outline">{statusLabels[m.status]}</Badge>
+                          )}
+                        </div>
+                      </div>
+                      {isLeader && (
+                        <Select
+                          value={m.role}
+                          disabled={locked}
+                          onValueChange={(value) =>
+                            updateMember.mutate({ id: m.id, role: value as MembershipRole })
+                          }
+                        >
+                          <SelectTrigger className="w-32 shrink-0" aria-label="Alterar papel">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="leader">Líder</SelectItem>
+                            <SelectItem value="minister">Ministro</SelectItem>
+                            <SelectItem value="musician">Músico</SelectItem>
+                          </SelectContent>
+                        </Select>
                       )}
                     </div>
+
+                    {isLeader && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={locked}
+                          onClick={() =>
+                            updateMember.mutate({
+                              id: m.id,
+                              status: m.status === "active" ? "inactive" : "active",
+                            })
+                          }
+                        >
+                          {m.status === "active" ? "Desativar" : "Ativar"}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          disabled={locked}
+                          onClick={() => removeMember.mutate(m.id)}
+                        >
+                          Remover
+                        </Button>
+                      </div>
+                    )}
+
+                    {isLeader && locked && (
+                      <p className="mt-2 text-xs text-muted-foreground">{lastLeaderMessage}</p>
+                    )}
                   </div>
-                  {isLeader && (
-                    <Select
-                      value={m.role}
-                      onValueChange={(value) =>
-                        updateMember.mutate({ id: m.id, role: value as MembershipRole })
-                      }
-                    >
-                      <SelectTrigger className="w-32 shrink-0" aria-label="Alterar papel">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="leader">Líder</SelectItem>
-                        <SelectItem value="minister">Ministro</SelectItem>
-                        <SelectItem value="musician">Músico</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  )}
-                </div>
-              ))
+                );
+              })
             )}
           </section>
         </>
