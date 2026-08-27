@@ -53,6 +53,22 @@ function Equipe({ membership }: { membership: CurrentMembership }) {
     },
   });
 
+  const activeLeaders = (data ?? []).filter((m) => m.role === "leader" && m.status === "active");
+  const lastLeaderId = activeLeaders.length === 1 ? activeLeaders[0]!.id : null;
+  const lastLeaderMessage = "Defina outro líder ativo antes de alterar ou remover este líder";
+
+  const removeMember = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("memberships").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Integrante removido.");
+      queryClient.invalidateQueries({ queryKey: ["memberships", membership.organization_id] });
+    },
+    onError: (error) => toast.error(friendlyError(error)),
+  });
+
   const updateMember = useMutation({
     mutationFn: async (input: { id: string; role?: MembershipRole; status?: MembershipStatus }) => {
       const patch: { role?: MembershipRole; status?: MembershipStatus } = {};
